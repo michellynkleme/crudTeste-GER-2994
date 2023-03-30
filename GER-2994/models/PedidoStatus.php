@@ -53,4 +53,5 @@ class PedidoStatus extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Pedidos::class, ['pedido_status_id' => 'id']);
     }
+    
 }

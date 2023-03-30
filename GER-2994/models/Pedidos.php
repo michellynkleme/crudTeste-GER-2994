@@ -16,7 +16,7 @@ use Yii;
  * @property int $ativo
  *
  * @property Clientes $cliente
- * @property PedidoImagens[] $pedidoImagens
+ * @property PedidoImagens[] $imagemPedido
  * @property PedidoStatus $pedidoStatus
  */
 class Pedidos extends \yii\db\ActiveRecord
@@ -35,9 +35,9 @@ class Pedidos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['produto', 'valor', 'data', 'pedido_status_id', 'ativo'], 'required'],
+            [['produto', 'valor', 'data', 'cliente', 'pedido_status_id', 'ativo'], 'required'],
             [['valor'], 'number'],
-            [['data'], 'safe'],
+            [['data'], 'date', 'format' => 'yyyy-MM-dd'],
             [['cliente_id', 'pedido_status_id', 'ativo'], 'default', 'value' => null],
             [['cliente_id', 'pedido_status_id', 'ativo'], 'integer'],
             [['produto'], 'string', 'max' => 255],
@@ -56,9 +56,9 @@ class Pedidos extends \yii\db\ActiveRecord
             'produto' => 'Produto',
             'valor' => 'Valor',
             'data' => 'Data',
-            'cliente_id' => 'Cliente ID',
-            'pedido_status_id' => 'Pedido Status ID',
-            'ativo' => 'Ativo',
+            'cliente_id' => 'Cliente',
+            'pedido_status_id' => 'Status do pedido',
+            'ativo' => 'Status do registro do pedido',
         ];
     }
 
@@ -79,7 +79,7 @@ class Pedidos extends \yii\db\ActiveRecord
      */
     public function getPedidoImagens()
     {
-        return $this->hasMany(PedidoImagens::class, ['pedido_id' => 'id']);
+        return $this->hasOne(PedidoImagens::class, ['pedido_id' => 'id']);
     }
 
     /**
@@ -91,4 +91,6 @@ class Pedidos extends \yii\db\ActiveRecord
     {
         return $this->hasOne(PedidoStatus::class, ['id' => 'pedido_status_id']);
     }
+
+
 }

@@ -16,6 +16,7 @@ use Yii;
  */
 class PedidoImagens extends \yii\db\ActiveRecord
 {
+    public $imagemPedido;
     /**
      * {@inheritdoc}
      */
@@ -33,6 +34,7 @@ class PedidoImagens extends \yii\db\ActiveRecord
             [['pedido_id'], 'required'],
             [['pedido_id'], 'default', 'value' => null],
             [['pedido_id'], 'integer'],
+            [['imagem', 'pedido_id'], 'file', 'extensions' => 'jpg, png'],
             [['imagem', 'capa'], 'string', 'max' => 255],
             [['pedido_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pedidos::class, 'targetAttribute' => ['pedido_id' => 'id']],
         ];
