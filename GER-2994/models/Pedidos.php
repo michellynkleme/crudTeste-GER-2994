@@ -35,7 +35,7 @@ class Pedidos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['produto', 'valor', 'data', 'cliente', 'pedido_status_id', 'ativo'], 'required'],
+            [['produto', 'valor', 'data', 'cliente_id', 'pedido_status_id', 'ativo'], 'required'],
             [['valor'], 'number'],
             [['data'], 'date', 'format' => 'yyyy-MM-dd'],
             [['cliente_id', 'pedido_status_id', 'ativo'], 'default', 'value' => null],

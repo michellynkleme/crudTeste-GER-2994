@@ -3,23 +3,19 @@
 namespace app\controllers;
 
 use app\models\Clientes;
-use app\models\ClientesSearch;
 use app\models\PedidoImagens;
 use app\models\Pedidos;
 use app\models\PedidosSearch;
 use app\models\PedidoStatus;
-use Imagine\Imagick\Imagine;
 use Yii;
 use yii\base\ErrorException;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 use yii2tech\csvgrid\CsvGrid;
 
