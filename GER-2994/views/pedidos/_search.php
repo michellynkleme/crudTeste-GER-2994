@@ -25,6 +25,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cliente_id') ?>
 
+    <?= $form->field($model, 'pedidoImagens') ?>
+
     <?php // echo $form->field($model, 'pedido_status_id') ?>
 
     <?php // echo $form->field($model, 'ativo') ?>

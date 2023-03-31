@@ -43,6 +43,7 @@ class Pedidos extends \yii\db\ActiveRecord
             [['produto'], 'string', 'max' => 255],
             [['cliente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::class, 'targetAttribute' => ['cliente_id' => 'id']],
             [['pedido_status_id'], 'exist', 'skipOnError' => true, 'targetClass' => PedidoStatus::class, 'targetAttribute' => ['pedido_status_id' => 'id']],
+            [['pedidoImagens'], 'safe'],
         ];
     }
 

@@ -68,7 +68,7 @@ class PedidosSearch extends Pedidos
         ]);
 
         $query->andFilterWhere(['ilike', 'produto', $this->produto]);
-        
+
         return $dataProvider;
     }
 }

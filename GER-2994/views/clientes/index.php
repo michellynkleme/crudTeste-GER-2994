@@ -34,7 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'cpf',
             'data_nasc',
             'telefone',
-            //'ativo',
+            ['attribute' => 'ativo',
+            'value' => function($model) {
+                return ($model->ativo) == 1 ? 'Ativo' : 'Inativo';
+                }
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Clientes $model, $key, $index, $column) {

@@ -11,7 +11,9 @@ use app\models\PedidoStatus;
 use Imagine\Imagick\Imagine;
 use Yii;
 use yii\base\ErrorException;
+use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use yii\web\Controller;
@@ -19,6 +21,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
+use yii2tech\csvgrid\CsvGrid;
 
 /**
  * PedidosController implements the CRUD actions for Pedidos model.
@@ -159,6 +162,28 @@ class PedidosController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionExport()
+    {
+        $searchModel = new PedidosSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        $exporter = new CsvGrid([
+            'dataProvider' => new ActiveDataProvider([
+                'query' => Pedidos::find(),
+            ]),
+            'columns' => [
+                'id',
+                'produto',
+                'valor',
+                'data',
+                ['attribute' => 'cliente.nome'],
+                ['attribute' => 'pedidoStatus.descricao'],
+                'ativo',
+            ],
+        ]);
+        return $exporter->export()->send('items.csv');
     }
 
     /**
